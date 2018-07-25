@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body>
+<p>监听3000，请求页面</p>
+
+
+<script>
+
+var p = document.getElementsByTagName('p')[0];
+var iframe = document.createElement('iframe');
+iframe.src = 'http://localhost:3001/res.html#getdata';   // location.hash为'#getdata'
+iframe.style.display = 'none';
+document.body.appendChild(iframe);
+
+// 通过b.html，把hash值传给此页面。b.html是桥梁，把res.html中hash值传给b.html，然后再传给req.html。
+function checkHash () {
+    if (location.hash) {
+        let data = location.hash.substring(1);     // 去除'#'号
+        p.innerHTML = data;
+    }
+}
+setInterval(checkHash, 2000);   // 每隔2s监听hash值是否发生变化
+
+</script>
+
+
+</body>
+</html>

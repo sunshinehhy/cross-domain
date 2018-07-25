@@ -1,0 +1,33 @@
+{
+  "name": "cross-domain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:req": "node server-for-crossorigin-req.js",
+    "start:res": "node server-for-crossorigin-res.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunhannie/cross-domain.git"
+  },
+  "keywords": [
+    "cross",
+    "domin"
+  ],
+  "author": "hehuiyun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunhannie/cross-domain/issues"
+  },
+  "homepage": "https://github.com/sunhannie/cross-domain#readme",
+  "dependencies": {
+    "koa": "^2.5.2",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-subdomain": "^2.1.0",
+    "koa-views": "^6.1.4",
+    "nunjucks": "^3.1.3"
+  }
+}

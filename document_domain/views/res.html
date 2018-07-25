@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body>
+<div>监听3001，相应页面</div>
+<script>
+  // 如果document.domain = 'localhost';，报错为 res:14 Uncaught DOMException: Failed to set the 'domain' property on 'Document': 'localhost' is a top-level domain.
+  // 所以再加一级，就不会报错
+    var data = 'hello world from b.xuhaodong.cn! 🤢';
+    document.domain = 'sub.localhost';//设置成主域  
+</script>
+
+
+</body>
+</html>

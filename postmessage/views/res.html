@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body>
+
+<p style="text-align: center;">这里是3001端口</p>
+<p>message： <span></span></p>
+<script>
+// postMessage跨域适合于同一页面的不同窗体(iframe)，所以在3001这个页面不会收到信息。
+    var span = document.getElementsByTagName('span')[0];
+
+    var parentWin = window.parent;  //父亲推送消息给3000
+
+    function receiveMessage (event) {
+        if (event.origin !== 'http://localhost:3000') {
+          console.log('event.data 3000');
+            return false
+        }
+        var data = event.data;
+        span.innerHTML = data;
+        parentWin.postMessage('我收到你的信息了😀--from 3001 port', 'http://localhost:3000/');
+
+        window.postMessage('window😀,我收到你的信息了,--from 3001 port', 'http://localhost:3001/'); //同一窗口post，是不能接收到，所以此代码没有生效
+    }
+
+    window.addEventListener('message', receiveMessage, false);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body>
+<div>监听3000，推送消息</div>
+<div id="result">
+
+</div>
+
+<script>
+  const result = document.getElementById('result');
+  function callbackFun(data){
+    // alert('收到消息'+JSON.stringify(data));
+    result.innerHTML = JSON.stringify(data);
+  }
+ 
+</script>
+<script src="http://localhost:3001?jsonp=callbackFun"></script>
+<!--在src里面的问号？后面的参数可以在3001端口页面中可以通过req.query.callback获取-->
+<!--jsonp=callbackFun  jsonp处可以任意写，因为只要callbackFun跟后台对应就行-->
+</body>
+</html>

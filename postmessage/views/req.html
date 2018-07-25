@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body>
+<div>监听3000，推送消息</div>
+<div id="father">
+    <p>这里3000端口</p>
+    <input type="text"/>
+    <button>发送信息</button>
+    <p style="text-align: left;">message :  <span></span></p>
+</div>
+<iframe id="child" src="http://localhost:3001"></iframe>
+<script>
+    // iframe是其它域名，但是和3000是同一页面的不同窗体。 iframe中出现frame.postMessage传的值。其实这个iframe就是res.html，只不过
+    var input = document.getElementsByTagName('input')[0];
+    var span = document.getElementsByTagName('span')[0];
+    var btn = document.getElementsByTagName('button')[0];
+    var frame = document.getElementById('child').contentWindow;
+
+    btn.onclick = function () {
+        var msg = input.value;
+        frame.postMessage('收到信息：' + msg + ' --from 3000 port！😨', 'http://localhost:3001');
+    }
+// 能收到3001 推送来的消息，
+    function receiveMessage (event) {
+        if (event.origin !== 'http://localhost:3001') {
+            console.log('event.data');
+            return false
+        }
+        var data = event.data;
+        span.innerHTML = data;  //此处收到3001的消息
+    }
+
+    window.addEventListener('message', receiveMessage, false);
+
+</script>
+<!--<iframe id="otherFrame" name="otherFrame" src={{iframeUrl}} onload="onLoad()"></iframe>-->
+
+</body>
+</html>

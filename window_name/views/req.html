@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>3000 window.name跨域</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body>
+<p>监听3000，请求页面</p>
+
+<script>
+
+var p = document.getElementsByTagName('p')[0];
+var isFirst = true;
+var iframe = document.createElement('iframe');
+
+iframe.src = 'http://localhost:3001/res'; //第一次加载url
+iframe.style.display = 'none';
+document.body.appendChild(iframe);
+
+// 先不同源，再同源。再切换到同源就能获取到window.name值
+var loadFunc = function () {
+    if(isFirst){
+        // console.log(iframe.contentWindow.name);  
+        //加载完url后，修改src属性，使其与3000端口同源
+        iframe.src = 'http://localhost:3000/req';
+        isFirst = false;
+        
+        // req:28 Uncaught DOMException: Blocked a frame with origin "http://localhost:3000" from accessing a cross-origin frame. at HTMLIFrameElement.loadFunc (http://localhost:3000/req:28:42)
+    }else {
+        //iframe回到原域后，获取name的值，执行回调函数，然后销毁iframe
+        p.innerHTML = iframe.contentWindow.name;
+        iframe.contentWindow.close();
+        document.body.removeChild(iframe);
+        iframe.src = '';
+        iframe = null;
+    }
+}
+
+//监听iframe是否加载，加载完执行loadFunc
+iframe.onload = loadFunc;
+</script>
+
+</body>
+</html>

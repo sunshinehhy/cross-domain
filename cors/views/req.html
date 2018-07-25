@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body>
+<div>监听3000，请求页面</div>
+<div id="result"></div>
+<button type="button" id="sendBtn">发送Ajax请求</button>
+<script>
+
+//  * 现象：当点击按钮发出请求后，才会出现cookie，因为cookie是一起请求过来的
+//  xhr.setRequestHeader('Content-Type', 'application/text');出错，因为发生了非简单请求，在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。xhr.setRequestHeader('Content-Type', 'text/plain');正确。分析见http://www.ruanyifeng.com/blog/2016/04/cors.html  （限定了请求头）
+
+  const sendBtn = document.getElementById('sendBtn');
+  const result = document.getElementById('result');
+  sendBtn.addEventListener('click', function() {
+//    fetch('http://localhost:3001', {
+//       mode: 'cors',
+//       'content-type' : 'text/html',
+//       'If-Match':"22FAA065-2664-4197-9C5E-C92EA03D0A16"
+//     //   credentials:'include'
+//     }).then( res => {
+
+//       if (res.ok) {  //res只有是对象才会执行res.json()
+//         // return res.json();
+//         return Promise.resolve(res.json()); //得出Promise值，Promise.resolve中难道不能放字符串吗？
+//       } else {
+//         throw new Error('Network response was not ok');
+//       }
+//     }).then( resData => {   //必须返回promise，then才会有用
+//       result.innerHTML = JSON.stringify(resData);
+//       console.log(resData);
+//     }).catch(err => {
+//       console.log(err.message);
+//     })
+
+        var xhr = new XMLHttpRequest();
+        var url = 'http://localhost:3001';    // 请求的3001端口获取数据
+        // xhr.setRequestHeader('If-Match', '1234');
+        xhr.open('GET', url);                 // 与3001端口建立一个连接
+        // xhr.setRequestHeader('Content-Type', 'application/text');
+        xhr.setRequestHeader('X-Custom-Header', 'value');
+        // xhr.setRequestHeader('Content-Type', 'text/plain');
+        xhr.onreadystatechange = () => {     // 请求状态改变后调用这个函数
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {  // 如果请求成功
+                result.innerHTML = xhr.response;
+            }
+        }
+       
+        xhr.send(null); 
+});
+
+</script>
+<!--<iframe id="otherFrame" name="otherFrame" src={{iframeUrl}} onload="onLoad()"></iframe>-->
+
+</body>
+</html>

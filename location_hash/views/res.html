@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body>
+<div>监听3001，相应页面</div>
+<script>
+var message = 'hello world from hash 😶'
+if (location.hash === '#getdata') {
+    var ifrproxy = document.createElement('iframe');
+    ifrproxy.style.display = 'none';
+    ifrproxy.src = 'http://localhost:3000/b#' + message; // 注意该文件在3000端口下
+    document.body.appendChild(ifrproxy);
+}
+</script>
+
+
+</body>
+</html>
