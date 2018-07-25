@@ -19,22 +19,25 @@ app.use(views(path.resolve(__dirname,'views'), {
 async function showPage(pagename, data, ctx) {
   await ctx.render(pagename,data);
 }
-router.get('/proxy', showPage.bind(this,'req',{
+router.get('/', showPage.bind(this,'req',{
 }));
 
-router.get('/proxy',  ctx => {
+router.get('/proxy', async ctx => {
     var url = ctx.query.url ;   // http://localhost:3001/
-    console.log(url);
-    // 向url发出请求
-    http.get(url, function(responseFromOtherDomain) {
-        // data事件会在数据接收过程中，每收到一段数据就触发一次，接收到的数据被传入回调函数。
+    
+    var getData = '1';
+    // 向url发出请求 ，因为url为空，所以会请求错误
+    await  http.request(url, function(responseFromOtherDomain) {
+    //     // data事件会在数据接收过程中，每收到一段数据就触发一次，接收到的数据被传入回调函数。
         responseFromOtherDomain.on("data", function(data) {
             ctx.set( {'Content-Type': 'text/html; charset=utf-8'});
-            ctx.body  = data;
+            ctx.body  = 'data'; //为什么不能设在里面
+            console.log(data); 
+            getData = data;
         });
     });
-
-    // ctx.body = 'url'; 
+    await console.log(getData);  //获取不到请求到的值，应该是异步
+    ctx.body = url; 
 }); 
 app.use(router.routes());
 
