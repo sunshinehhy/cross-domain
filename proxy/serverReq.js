@@ -36,7 +36,8 @@ router.get('/proxy', async ctx => {
             getData = data;
         });
     });
-    await console.log(getData);  //获取不到请求到的值，应该是异步
+    
+    await console.log(getData);  //获取不到请求到的值，此处应该是异步，怎么变成同步呢？
     ctx.body = url; 
 }); 
 app.use(router.routes());
