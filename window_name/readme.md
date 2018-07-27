@@ -5,3 +5,4 @@ window.name跨域
 3）window.name一直存在与当前窗口，即使是有新的页面载入也不会改变window.name的值；
 4）window.name可以存储不超过2M的数据，数据格式按需自定义。
 
+https://www.jianshu.com/p/43ff69d076e3
