@@ -19,13 +19,14 @@ var iframe = document.createElement('iframe');
 iframe.src = 'http://localhost:3001/res'; //第一次加载url
 iframe.style.display = 'none';
 document.body.appendChild(iframe);
-
+// 用一个隐藏的iframe作为中间的代理
 // 先不同源，再同源。再切换到同源就能获取到window.name值
+// 试了下，如果不变成同源就取不到window.name值，这就意味着不同源是取不到window.name的
 var loadFunc = function () {
     if(isFirst){
         // console.log(iframe.contentWindow.name);  
         //加载完url后，修改src属性，使其与3000端口同源
-        iframe.src = 'http://localhost:3000/req';
+        iframe.src = 'http://localhost:3000/req'; 
         isFirst = false;
         
         // req:28 Uncaught DOMException: Blocked a frame with origin "http://localhost:3000" from accessing a cross-origin frame. at HTMLIFrameElement.loadFunc (http://localhost:3000/req:28:42)
@@ -41,6 +42,35 @@ var loadFunc = function () {
 
 //监听iframe是否加载，加载完执行loadFunc
 iframe.onload = loadFunc;
+
+/*
+// 此种写法也可以，已经测试过
+    var boo = false;
+    var iframe = document.createElement('iframe');
+    var loadData = function() {
+        // console.log(iframe.contentWindow.name);//写在此处报跨域错误
+        if (boo) {
+            var data = iframe.contentWindow.name;    //获取window.name
+            p.innerHTML = iframe.contentWindow.name;
+            console.log(data); 
+            //销毁数据   
+            iframe.contentWindow.document.write('');
+            iframe.contentWindow.close();
+            document.body.removeChild(iframe);
+        } else {
+            boo = true;
+            iframe.contentWindow.location = "http://localhost:3000/req";    // 设置的代理文件,iframe重新载入，我的理解是让其再执行一遍js代码
+        }  
+    };
+    iframe.src = 'http://localhost:3001/res';
+    if (iframe.attachEvent) {
+        iframe.attachEvent('onload', loadData);
+    } else {
+        iframe.onload  = loadData;
+    }
+    document.body.appendChild(iframe);
+*/
+
 </script>
 
 </body>
