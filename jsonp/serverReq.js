@@ -27,3 +27,18 @@ app.use(router.routes());
 app.listen(3000, () => {
   console.log('Serving crossorigin pages. Listening 3000 with domain localhosts');
 })
+
+
+// const process = require('process');
+// process.on('exit', (code) => {
+//   console.log(`即将退出，退出码：${code}`);
+// });
+
+// process.on('uncaughtException', (err) => {
+//   // fs.writeSync(1, `捕获到异常：${err}\n`);
+// });
+
+// setTimeout(() => {
+//   console.log('这里仍然会运行。');
+//   console.log(`This processor architecture is ${process.arch}`);
+// }, 500);
