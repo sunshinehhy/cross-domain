@@ -15,6 +15,7 @@
 
 //  * 现象：当点击按钮发出请求后，才会出现cookie，因为cookie是一起请求过来的
 //  xhr.setRequestHeader('Content-Type', 'application/text');出错，因为发生了非简单请求，在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。xhr.setRequestHeader('Content-Type', 'text/plain');正确。分析见http://www.ruanyifeng.com/blog/2016/04/cors.html  （限定了请求头）
+// 'application/json'也会发生非简单请求
 
   const sendBtn = document.getElementById('sendBtn');
   const result = document.getElementById('result');
