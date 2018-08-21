@@ -91,8 +91,7 @@ routerPost.post('/checkemail', ctx => {
 if (ctx.request.method == "OPTIONS") {
     ctx.response.status = 200
 }
-  const name = ctx.params.name;
-  const data = ctx.request.body;
+  // ctx.type = 'json';
   ctx.body = fs.readFileSync('./user.json');
   
 })
