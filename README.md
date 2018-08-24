@@ -14,3 +14,10 @@ https://github.com/zendesk/cross-storage
 
 // console.log(__dirname);  __dirname文件所在目录的完整绝对路径
 // /Users/huiyun/hhy/MTS/MyTest/cross-domain/window_name
+
+post请求默认是json数据格式
+
+https://www.npmjs.com/package/koa-bodyparser  (koa-bodyparser会转换格式)
+
+当提交应该更新文件，想办法怎么更新文件。
+当支持和反对更新后台数据，现在仅仅模仿post一个后台。
