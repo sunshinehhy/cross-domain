@@ -1,8 +1,13 @@
+
 https://github.com/FatDong1/cross-domain
 https://github.com/zendesk/cross-storage
-# cross-domain
+# cross-domain描述
 
 跨域的简单demo，所有demo都是使用基于nodeJs的下一代Web开发框架Koa。
+
+包含：jsonp/document.domain/window.name/cors/postmessage/location.hash
+
+## koa使用出现的问题
 
 ## demo介绍
 用node的web框架Koa在3000端口和3001端口分别开启一个静态服务器，在两个端口间进行跨域传输数据。
