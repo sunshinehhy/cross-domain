@@ -24,7 +24,7 @@ router.get('/', ctx => {
       'Cache-Control': 'public, max-age=604800',
       'Etag': '1234',
       'Last-Modified': new Date(),
-      'Access-Control-Request-Method': 'GET,PUT,POST',
+      'Access-Control-Request-Method': 'GET,PUT,POST,OPTIONS',
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Request-Headers':'X-Custom-Header',
       'Access-Control-Max-Age': 1728000
