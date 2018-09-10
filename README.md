@@ -12,6 +12,8 @@ https://github.com/zendesk/cross-storage
 ## demo介绍
 用node的web框架Koa在3000端口和3001端口分别开启一个静态服务器，在两个端口间进行跨域传输数据。
 
+## express和koa结合使用
+在websocket中测试过
 
 ## 路劲
 // console.log(__filename); __filename变量获取当前模块文件的带有完整绝对路径的文件名
